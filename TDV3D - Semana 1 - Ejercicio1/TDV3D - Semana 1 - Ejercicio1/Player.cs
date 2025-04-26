@@ -8,32 +8,44 @@ namespace TDV3D___Semana_1___Ejercicio1
 {
     public class Player
     {
-        public int Life { get; private set; }
+        public string Name { get; private set; }
+        public int Health { get; private set; }
+        public int MaxHealth { get; private set; }
         public int Damage { get; private set; }
+        Random random = new Random();
 
-        public Player(int life, int damage)
+        public Player(string name, int health, int damage)
         {
-            if (life > 100 || damage > 100)
-            {
-                throw new ArgumentException("La vida y el daño no pueden superar los 100.");
-            }
-
-            Life = life;
+            Name = name;
+            Health = health;
+            MaxHealth = health;
             Damage = damage;
         }
 
-        public void ReceiveDamage(int damage)
+        public void ReceiveDamage(int amount)
         {
-            Life -= damage;
-            if (Life < 0)
-            {
-                Life = 0;
-            }
+            Health -= amount;
+            if (Health < 0) Health = 0;
         }
 
-        public int GetDamage()
+        public void Heal()
         {
-            return Damage;
+            int healAmount = random.Next(10, 21);
+            Health += healAmount;
+            if (Health > MaxHealth)
+                Health = MaxHealth;
+
+            Console.WriteLine($"{Name} se curó {healAmount} puntos de vida.");
+        }
+
+        public bool TryToEvade()
+        {
+            bool success = random.NextDouble() < 0.5;
+            if (success)
+                Console.WriteLine($"{Name} esquivó exitosamente el próximo ataque.");
+            else
+                Console.WriteLine($"{Name} falló al intentar esquivar...");
+            return success;
         }
     }
 }
