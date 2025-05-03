@@ -30,7 +30,7 @@ namespace TDV3D___Semana_1___Ejercicio1
 
         public void Heal()
         {
-            int healAmount = random.Next(10, 21);
+            int healAmount = random.Next(18, 25);
             Health += healAmount;
             if (Health > MaxHealth)
                 Health = MaxHealth;
@@ -40,7 +40,7 @@ namespace TDV3D___Semana_1___Ejercicio1
 
         public bool TryToEvade()
         {
-            bool success = random.NextDouble() < 0.5;
+            bool success = random.NextDouble() < 0.7;
             if (success)
                 Console.WriteLine($"{Name} esquivó exitosamente el próximo ataque.");
             else
